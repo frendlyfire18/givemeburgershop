@@ -8,6 +8,7 @@ import Input from "../components/Input";
 import { useState } from "react";
 import HistoryItem from "../components/HistoryItem";
 
+
 export default function History({ shops }) {
   const router = useRouter();
   const [data, setData] = useState({});
@@ -50,7 +51,7 @@ export default function History({ shops }) {
                 onClick={async () => {
                   setLoading(true);
                   const response = await fetch(
-                    `http://localhost:3000/api/history?email=${email}&phone=${phone}`
+                    `${cur_url_with_host_and_port}/api/history?email=${email}&phone=${phone}`
                   );
                   const data = await response.json();
                   console.log(data);
