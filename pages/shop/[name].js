@@ -4,7 +4,7 @@ import GoodCard from "../../components/Card";
 import LinkCustom from "../../components/CustomLink"
 import Text from "../../components/CustomText"
 import Header from "../../components/Header"
-import { cur_url_with_host_and_port } from "../lib/constants";
+import { cur_url_with_host_and_port } from "../../lib/constants";
 
 export default function Home({ movies,shops }) {
   const router = useRouter();
