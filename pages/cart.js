@@ -13,6 +13,7 @@ import {selectCart} from "../redux/feature/cartSlice"
 import {useAppDispatch, useAppSelector} from "../redux/hook"
 import Input from "../components/Input";
 import { useRouter } from "next/router";
+import { cur_url_with_host_and_port } from "../lib/constants";
 
 export default function Cart(){
     const router = useRouter();
@@ -52,7 +53,7 @@ export default function Cart(){
                     <button onClick={async ()=>{
                         setLoading(true)
                         const data = {name:name,phone:phone,address:currentAddress,email:email,order:cart}
-                        const response = await fetch("http://localhost:3000/api/history", {
+                        const response = await fetch(`${cur_url_with_host_and_port}/api/history`, {
                             method: 'POST', // *GET, POST, PUT, DELETE, etc.
                             mode: 'cors', // no-cors, *cors, same-origin
                             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
