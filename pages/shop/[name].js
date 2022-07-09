@@ -4,6 +4,7 @@ import GoodCard from "../../components/Card";
 import LinkCustom from "../../components/CustomLink"
 import Text from "../../components/CustomText"
 import Header from "../../components/Header"
+import { cur_url_with_host_and_port } from "../lib/constants";
 
 export default function Home({ movies,shops }) {
   const router = useRouter();
@@ -50,10 +51,10 @@ export default function Home({ movies,shops }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch(`http://localhost:3000/api/burgers?q=${context.query.name}`);
+  const res = await fetch(`${cur_url_with_host_and_port}/api/burgers?q=${context.query.name}`);
   const data = await res.json();
 
-  const res_1 = await fetch(`http://localhost:3000/api/shops`);
+  const res_1 = await fetch(`${cur_url_with_host_and_port}/api/shops`);
   const data_1 = await res_1.json();
 
   return {
