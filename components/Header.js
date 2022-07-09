@@ -5,11 +5,11 @@ import Link from "next/link"
 import {selectCart} from "../redux/feature/cartSlice"
 import {useAppDispatch, useAppSelector} from "../redux/hook"
 
-function Badge({children}){
+function Badge(){
   return(
-    <div className="flex jutify-center text-xs items-center rounded-full ml-1 mb-2 px-1.5 py-0.5 bg-fuchsia-800">
-      {children}
-    </div>
+    <span class="flex h-3 w-3">
+      <span class="animate-ping relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+    </span>
   )
 }
 
@@ -36,9 +36,11 @@ export default function Header() {
           <LinkCustom>Каталог{/*<Badge/>*/}</LinkCustom>
         </Link>
         <Link href={"/cart"}>
-          <LinkCustom>Корзина <Badge>{cart.length}</Badge></LinkCustom>
+          <LinkCustom>Корзина {cart.length>0&&<Badge></Badge>}</LinkCustom>
         </Link>
-        <LinkCustom>История</LinkCustom>
+        <Link href={"/history"}>
+          <LinkCustom>История</LinkCustom>
+        </Link>
       </div>
     </>
   );

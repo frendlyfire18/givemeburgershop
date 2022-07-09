@@ -1,19 +1,33 @@
 import {uri,options} from "../../lib/constants";
 import { MongoClient } from 'mongodb'
 import { ObjectId } from "mongodb";
+const POST_METHOD = "POST";
 
 export default async (req, res) => {
-  const option = {address:req.query.address,email:req.query.email,name:req.query.name,number:req.query.number}
-  const client = new MongoClient(uri, options)
-  const db = client.db("givemeburger");
+    const client = new MongoClient(uri, options)
+    const db = client.db("givemeburger")
 
-  const burgers = await db
+    if(req.method === POST_METHOD){
+        const orders = await db
+            .collection("history")
+            .insertOne(req.body)
+
+        res.json({status:200,message:"Order added"})
+        return;
+    }
+
+    const find_option = req.query.phone && req.query.email ? {phone:"+"+req.query.phone,email:req.query.email}:undefined;
+    
+    if(find_option === undefined){
+        res.json({status:400,message:"Don't have date"});
+        return;
+    }
+    const orders = await db
     .collection("history")
-    .insertOne(option)
-    .catch((e)=>{
-        res.json({status:404,message:e.message})
-    })
-    .then(()=>{
-        res.json({status:200,message:"Order edded"})
-    })
+    .find(find_option)
+    .sort({ metacritic: -1 })
+    .limit(20)
+    .toArray();
+
+    res.json(orders);
 };
