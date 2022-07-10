@@ -14,6 +14,7 @@ import {useAppDispatch, useAppSelector} from "../redux/hook"
 import Input from "../components/Input";
 import { useRouter } from "next/router";
 import { cur_url_with_host_and_port } from "../lib/constants";
+import Loading from "../components/Loading";
 
 export default function Cart(){
     const router = useRouter();
@@ -48,7 +49,7 @@ export default function Cart(){
                 <div className="flex flex-col rounded-lg bg-gray-500 m-10 p-10"> 
                     <Input set={setName} title="Имя:" type={"name"}/>
                     <Input Change={(value)=>setAddress(value)} title="Адресс:" type={"address"}/>
-                    <Input set={setPhone} title="Телефон:" type={"phone"}/>
+                    <Input set={setPhone} leftItem={"+"} title="Телефон:" type={"phone"}/>
                     <Input set={setEmail} title="Почта:" type={"email"}/>
                     <button onClick={async ()=>{
                         setLoading(true)
@@ -69,7 +70,7 @@ export default function Cart(){
                         setLoading(false);
                         router.push("/")
                         //console.log("Values:",currentAddress,phone,name,email,cart[0].id)
-                    }} type="submit" class="flex justify-center items-center btn py-1 px-2 my-2 rounded-lg bg-indigo-600 hover:bg-indigo-800">Заказать{isLoading&&<svg class="animate-spin mx-2 h-5 w-5 mr-3 border-2 rounded-full border-t-black" viewBox="0 0 24 24"></svg>}</button>   
+                    }} type="submit" class="flex justify-center items-center btn py-1 px-2 my-2 rounded-lg bg-indigo-600 hover:bg-indigo-800">Заказать{isLoading&&<Loading/>}</button>   
                 </div>
                 <div className="flex flex-col rounded-lg bg-gray-500 m-10 p-10">
                     {

@@ -16,7 +16,7 @@ export default async (req, res) => {
         return;
     }
 
-    const find_option = req.query.phone && req.query.email ? {phone:"+"+req.query.phone,email:req.query.email}:undefined;
+    const find_option = req.query.phone && req.query.email ? {phone:req.query.phone,email:req.query.email}:undefined;
     
     if(find_option === undefined){
         res.json({status:400,message:"Don't have date"});

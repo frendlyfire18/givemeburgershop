@@ -1,13 +1,11 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import GoodCard from "../components/Card";
 import LinkCustom from "../components/CustomLink";
 import Header from "../components/Header";
 import { cur_url_with_host_and_port } from "../lib/constants";
 import Input from "../components/Input";
 import { useState } from "react";
 import HistoryItem from "../components/HistoryItem";
-
 
 export default function History({ shops }) {
   const router = useRouter();
@@ -45,7 +43,12 @@ export default function History({ shops }) {
               <h1>Ваши данные</h1>
             </div>
             <div className="flex flex-col rounded-lg bg-gray-500 m-10 p-10">
-              <Input set={setPhone} title="Телефон:" type={"phone"} />
+              <Input
+                set={setPhone}
+                leftItem={"+"}
+                title="Телефон:"
+                type={"phone"}
+              />
               <Input set={setEmail} title="Почта:" type={"email"} />
               <button
                 onClick={async () => {
